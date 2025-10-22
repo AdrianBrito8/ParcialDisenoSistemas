@@ -36,7 +36,7 @@ class OlivoService(ArbolService):
         super().__init__(AbsorcionSeasonalStrategy())
 
     @override
-    def mostrar_datos(self, cultivo: Olivo) -> None:
+    def mostrar_datos(self, cultivo: 'Olivo') -> None:
         """
         Muestra los datos especificos de un Olivo.
         Implementacion de US-009.
@@ -50,7 +50,7 @@ class OlivoService(ArbolService):
         # 2. Imprime los datos especificos de Olivo
         print(f"Tipo de aceituna: {cultivo.get_tipo_aceituna().value}")
 
-    def crecer(self, arbol: Olivo) -> None:
+    def crecer(self, arbol: 'Olivo') -> None:
         """
         Metodo sobrecargado para aplicar el crecimiento especifico del Olivo.
         Logica de negocio de US-008.

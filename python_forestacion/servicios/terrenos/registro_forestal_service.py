@@ -40,7 +40,9 @@ class RegistroForestalService:
         """
         self._registry = CultivoServiceRegistry.get_instance()
 
-    def mostrar_datos(self, registro: RegistroForestal) -> None:
+    # --- CORRECCION AQUI ---
+    # Se usan comillas en 'RegistroForestal'
+    def mostrar_datos(self, registro: 'RegistroForestal') -> None:
         """
         Muestra un reporte completo del registro forestal.
         Implementacion de US-023.
@@ -78,7 +80,9 @@ class RegistroForestalService:
         
         print("=================================\n")
 
-    def persistir(self, registro: RegistroForestal) -> str:
+    # --- CORRECCION AQUI ---
+    # Se usan comillas en 'RegistroForestal'
+    def persistir(self, registro: 'RegistroForestal') -> str:
         """
         Guarda (serializa) un RegistroForestal en disco usando Pickle.
         Implementacion de US-021.
@@ -138,7 +142,9 @@ class RegistroForestalService:
             )
 
     @staticmethod
-    def leer_registro(propietario: str) -> RegistroForestal:
+    # --- CORRECCION AQUI ---
+    # Se usan comillas en 'RegistroForestal'
+    def leer_registro(propietario: str) -> 'RegistroForestal':
         """
         Carga (deserializa) un RegistroForestal desde disco.
         Implementacion de US-022.

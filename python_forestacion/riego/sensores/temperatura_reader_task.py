@@ -30,12 +30,15 @@ class TemperaturaReaderTask(threading.Thread, Observable[float]):
         automaticamente cuando el programa principal termine.
         (Rubrica 5.1)
         """
-        # 1. Inicializar el Thread
-        #    daemon=True es clave (Rubrica 5.1)
-        super(threading.Thread, self).__init__(daemon=True, name="SensorTempThread")
+        # --- CORRECCION AQUI ---
+        # Llamamos a los __init__ de CADA padre explícitamente
+        # para evitar el conflicto de 'super()' en herencia multiple.
         
-        # 2. Inicializar el Observable
-        super(Observable, self).__init__()
+        # 1. Inicializar el Thread EXPLICITAMENTE
+        threading.Thread.__init__(self, daemon=True, name="SensorTempThread")
+        
+        # 2. Inicializar el Observable EXPLICITAMENTE
+        Observable.__init__(self)
         
         # 3. Control de detencion (Graceful Shutdown - US-013)
         self._detenido: threading.Event = threading.Event()
@@ -65,9 +68,7 @@ class TemperaturaReaderTask(threading.Thread, Observable[float]):
             # (Rubrica 1.3)
             self.notificar_observadores(temperatura)
             
-            # 4. Esperar.
-            #    Usa 'wait' en lugar de 'sleep' para que la
-            #    detencion sea instantanea (si .detener() es llamada)
+            # 4. Esperar
             self._detenido.wait(timeout=C.INTERVALO_SENSOR_TEMPERATURA)
                 
         print(f"[{self.name}] Sensor de temperatura detenido.")

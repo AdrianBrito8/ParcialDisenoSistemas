@@ -42,7 +42,7 @@ class LechugaService(CultivoService):
         )
 
     @override
-    def mostrar_datos(self, cultivo: Lechuga) -> None:
+    def mostrar_datos(self, cultivo: 'Lechuga') -> None:
         """
         Muestra los datos especificos de una Lechuga.
         Implementacion de US-009.

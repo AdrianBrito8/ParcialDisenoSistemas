@@ -41,7 +41,7 @@ class ZanahoriaService(CultivoService):
         )
 
     @override
-    def mostrar_datos(self, cultivo: Zanahoria) -> None:
+    def mostrar_datos(self, cultivo: 'Zanahoria') -> None:
         """
         Muestra los datos especificos de una Zanahoria.
         Implementacion de US-009.

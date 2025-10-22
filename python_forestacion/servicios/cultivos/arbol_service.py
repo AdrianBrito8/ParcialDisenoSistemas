@@ -14,8 +14,9 @@ if TYPE_CHECKING:
     from python_forestacion.entidades.cultivos.pino import Pino
     from python_forestacion.entidades.cultivos.olivo import Olivo
     
-# Definimos un TypeAlias para Arbol
-Arbol = Pino | Olivo
+    # El alias 'Arbol' se mueve DENTRO del bloque TYPE_CHECKING
+    Arbol = Pino | Olivo
+    
 
 class ArbolService(CultivoService):
     """
@@ -30,7 +31,7 @@ class ArbolService(CultivoService):
 
     @abstractmethod
     @override
-    def mostrar_datos(self, cultivo: Arbol) -> None:
+    def mostrar_datos(self, cultivo: 'Arbol') -> None:
         """
         Metodo abstracto para mostrar datos (redefinido para Arbol).
 
@@ -42,9 +43,11 @@ class ArbolService(CultivoService):
         print(f"Superficie: {cultivo.get_superficie()} m²")
         print(f"Agua almacenada: {cultivo.get_agua()} L")
         print(f"ID: {cultivo.get_id()}")
+        # El type checker sabe que 'cultivo' (que es 'Arbol')
+        # tendra 'get_altura()'
         print(f"Altura: {cultivo.get_altura():.2f} m") # Formatea a 2 decimales
 
-    def crecer(self, arbol: Arbol, cantidad_crecimiento: float) -> None:
+    def crecer(self, arbol: 'Arbol', cantidad_crecimiento: float) -> None:
         """
         Aplica el crecimiento a un arbol.
         Logica de negocio de US-008.
@@ -58,6 +61,6 @@ class ArbolService(CultivoService):
         """
         if cantidad_crecimiento < 0:
             raise ValueError("El crecimiento no puede ser negativo")
-            
+        
         altura_actual = arbol.get_altura()
         arbol.set_altura(altura_actual + cantidad_crecimiento)

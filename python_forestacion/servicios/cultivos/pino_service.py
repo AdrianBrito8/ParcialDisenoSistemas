@@ -38,7 +38,7 @@ class PinoService(ArbolService):
         super().__init__(AbsorcionSeasonalStrategy())
 
     @override
-    def mostrar_datos(self, cultivo: Pino) -> None:
+    def mostrar_datos(self, cultivo: 'Pino') -> None:
         """
         Muestra los datos especificos de un Pino.
         Implementacion de US-009.
@@ -53,7 +53,7 @@ class PinoService(ArbolService):
         # 2. Imprime los datos especificos de Pino
         print(f"Variedad: {cultivo.get_variedad()}")
 
-    def crecer(self, arbol: Pino) -> None:
+    def crecer(self, arbol: 'Pino') -> None:
         """
         Metodo sobrecargado para aplicar el crecimiento especifico del Pino.
         Logica de negocio de US-008.

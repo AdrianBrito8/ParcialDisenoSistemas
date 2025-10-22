@@ -28,11 +28,15 @@ class HumedadReaderTask(threading.Thread, Observable[float]):
         
         Configura el thread como 'daemon' (Rubrica 5.1)
         """
-        # 1. Inicializar el Thread
-        super(threading.Thread, self).__init__(daemon=True, name="SensorHumedThread")
+        # --- CORRECCION AQUI ---
+        # Llamamos a los __init__ de CADA padre explícitamente
+        # para evitar el conflicto de 'super()' en herencia multiple.
+
+        # 1. Inicializar el Thread EXPLICITAMENTE
+        threading.Thread.__init__(self, daemon=True, name="SensorHumedThread")
         
-        # 2. Inicializar el Observable
-        super(Observable, self).__init__()
+        # 2. Inicializar el Observable EXPLICITAMENTE
+        Observable.__init__(self)
         
         # 3. Control de detencion (Graceful Shutdown - US-013)
         self._detenido: threading.Event = threading.Event()
@@ -61,8 +65,7 @@ class HumedadReaderTask(threading.Thread, Observable[float]):
             # 3. Notificar (PUSH - Observer Pattern)
             self.notificar_observadores(humedad)
             
-            # 4. Esperar (con la correccion ya aplicada)
-            #    Usa 'wait' en lugar de 'sleep'
+            # 4. Esperar
             self._detenido.wait(timeout=C.INTERVALO_SENSOR_HUMEDAD)
                 
         print(f"[{self.name}] Sensor de humedad detenido.")
