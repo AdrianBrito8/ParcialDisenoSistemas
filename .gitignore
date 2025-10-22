@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+.env
+.venv
+venv/
+
+# Archivos de datos generados
+data/
+*.dat
+
+# SO
+.DS_Store
